@@ -14,16 +14,11 @@ class GetTaxForm extends React.Component {
             taxOutput: 0
         };
     }
-    componentDidMount() {
-        if (this.state.municipalities.length > 0) {
-            const selectedMunicipality = this.state.municipalities[0];
-            this.setState({ selectedMunicipality });
-        }   
-        
+    componentDidMount() {       
         axios.get('https://localhost:44380/api/Taxes/MunicipalitiesNames').then(response => {
-            console.log(response.data);
             const municipalities = response.data;
-            this.setState({ municipalities });
+            const selectedMunicipality = response.data[0];
+            this.setState({ municipalities, selectedMunicipality });
         })
     }
     render() {
